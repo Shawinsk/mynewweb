@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Website</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#10b981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+.custom-checkbox {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+.custom-checkbox:checked {
+background-color: #3b82f6;
+border-color: #3b82f6;
+}
+.custom-checkbox:checked::after {
+content: '';
+position: absolute;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 48px;
+height: 24px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+transition: .4s;
+border-radius: 24px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #3b82f6;
+}
+input:checked + .slider:before {
+transform: translateX(24px);
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation Bar -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+<nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+</div>
+<!-- Desktop Menu -->
+<div class="hidden md:flex space-x-8">
+<a href="#home" class="text-gray-800 hover:text-primary font-medium">Home</a>
+<a href="#about" class="text-gray-800 hover:text-primary font-medium">About Us</a>
+<a href="#services" class="text-gray-800 hover:text-primary font-medium">Services</a>
+<a href="#contact" class="text-gray-800 hover:text-primary font-medium">Contact Us</a>
+</div>
+<!-- Mobile Menu Button -->
+<div class="md:hidden w-10 h-10 flex items-center justify-center">
+<button id="mobile-menu-button" class="text-gray-600 hover:text-primary">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-white px-4 py-3 shadow-md">
+<div class="flex flex-col space-y-3">
+<a href="#home" class="text-gray-800 hover:text-primary font-medium py-2">Home</a>
+<a href="#about" class="text-gray-800 hover:text-primary font-medium py-2">About Us</a>
+<a href="#services" class="text-gray-800 hover:text-primary font-medium py-2">Services</a>
+<a href="#contact" class="text-gray-800 hover:text-primary font-medium py-2">Contact Us</a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section id="home" class="relative">
+<div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent z-10"></div>
+<div class="relative w-full h-[600px]" style="background-image: url('https://public.readdy.ai/ai/img_res/802b7b7b586de5bc3a2cdf287072254f.jpg'); background-size: cover; background-position: center;"></div>
+<div class="absolute inset-0 z-20 flex items-center">
+<div class="container mx-auto px-4">
+<div class="max-w-xl">
+<h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Reliable Solutions for Your Business</h1>
+<p class="text-xl text-white mb-8">Take your business to the next level with our professional services</p>
+<div class="flex flex-wrap gap-4">
+<button onclick="openCardDetails('contact')" class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-700 transition whitespace-nowrap">Contact Us</button>
+<button onclick="openCardDetails('about')" class="bg-white text-gray-800 px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition whitespace-nowrap">Learn More</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Page Navigation Cards -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-800 mb-4">Explore Our Website</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Navigate through our main pages to find the information you need</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Card 1 -->
+<div class="bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden cursor-pointer" onclick="openCardDetails('home')">
+<div class="h-48 bg-gray-200 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/c057d3b09e7314367bde544115948ea7.jpg" alt="Home" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Home</h3>
+<p class="text-gray-600 mb-4">Find complete information about our company and services</p>
+<button class="text-primary font-medium flex items-center">
+<span>Visit</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden cursor-pointer" onclick="openCardDetails('about')">
+<div class="h-48 bg-gray-200 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/27ab98febaeb0f1e00fc025726568b8e.jpg" alt="About Us" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-800 mb-2">About Us</h3>
+<p class="text-gray-600 mb-4">Learn about our history, vision, and team</p>
+<button class="text-primary font-medium flex items-center">
+<span>Visit</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden cursor-pointer" onclick="openCardDetails('services')">
+<div class="h-48 bg-gray-200 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/28d1f2a2065f208e3b9470900e471f95.jpg" alt="Services" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Services</h3>
+<p class="text-gray-600 mb-4">Explore the specific services and solutions we offer</p>
+<button class="text-primary font-medium flex items-center">
+<span>Visit</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden cursor-pointer" onclick="openCardDetails('contact')">
+<div class="h-48 bg-gray-200 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/0cb97be7d764d0db60369503a113be87.jpg" alt="Contact Us" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Contact Us</h3>
+<p class="text-gray-600 mb-4">Our office locations, contact details, and online form</p>
+<button class="text-primary font-medium flex items-center">
+<span>Visit</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Section -->
+<section id="about" class="py-16 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="text-3xl font-bold text-gray-800 mb-6">Benefits of Our Website</h2>
+<p class="text-gray-600 mb-6">Our modern website is designed to make your experience easier and help you find the information you need quickly. With our user-friendly interface and responsive design, you can access our website from any device.</p>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line ri-lg"></i>
+</div>
+<div>
+<h3 class="font-medium text-gray-800 mb-1">Easy Navigation</h3>
+<p class="text-gray-600">We've designed a very clear menu structure to make it easy to navigate through our website.</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line ri-lg"></i>
+</div>
+<div>
+<h3 class="font-medium text-gray-800 mb-1">Responsive Design</h3>
+<p class="text-gray-600">Our website is optimized for all devices, including mobile phones, tablets, and computers.</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line ri-lg"></i>
+</div>
+<div>
+<h3 class="font-medium text-gray-800 mb-1">Engaging Content</h3>
+<p class="text-gray-600">We present the information you need in an engaging and easy-to-understand way.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-lg overflow-hidden shadow-lg">
+<img src="https://public.readdy.ai/ai/img_res/1d0f6188ca4470526f45244ff664d83d.jpg" alt="Responsive Design" class="w-full h-full object-cover object-top">
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section id="services" class="py-16 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-800 mb-4">Our Website Features</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">We've included a range of features to make your experience easier and more productive</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="bg-gray-50 p-8 rounded-lg">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-6">
+<i class="ri-layout-4-line ri-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">Modern Interface</h3>
+<p class="text-gray-600">Our modern and user-friendly interface allows you to easily find the information you need.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-gray-50 p-8 rounded-lg">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-6">
+<i class="ri-speed-line ri-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">Fast Loading</h3>
+<p class="text-gray-600">Our website loads very quickly, saving you time.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-gray-50 p-8 rounded-lg">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-6">
+<i class="ri-search-line ri-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">Search Functionality</h3>
+<p class="text-gray-600">You can quickly find the information you need using our powerful search functionality.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section id="contact" class="py-16 bg-primary">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center">
+<h2 class="text-3xl font-bold text-white mb-4">Join Our Newsletter</h2>
+<p class="text-white/80 mb-8">Subscribe to our newsletter to receive our latest updates and news</p>
+<form class="flex flex-col sm:flex-row gap-4 justify-center">
+<input type="email" placeholder="Enter your email" class="px-4 py-3 rounded-button w-full sm:w-96 border-none focus:ring-2 focus:ring-white/30 outline-none text-sm">
+<button type="submit" class="bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition whitespace-nowrap">Subscribe</button>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Company Info -->
+<div>
+<h3 class="text-xl font-bold mb-4">Company</h3>
+<p class="text-gray-300 mb-4">We are a trusted company providing solutions for your business. Our goal is to help you succeed.</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-300 hover:text-white">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-facebook-fill"></i>
+</div>
+</a>
+<a href="#" class="text-gray-300 hover:text-white">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-twitter-x-fill"></i>
+</div>
+</a>
+<a href="#" class="text-gray-300 hover:text-white">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-instagram-fill"></i>
+</div>
+</a>
+<a href="#" class="text-gray-300 hover:text-white">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-linkedin-fill"></i>
+</div>
+</a>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h3 class="text-xl font-bold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#home" class="text-gray-300 hover:text-white">Home</a></li>
+<li><a href="#about" class="text-gray-300 hover:text-white">About Us</a></li>
+<li><a href="#services" class="text-gray-300 hover:text-white">Services</a></li>
+<li><a href="#contact" class="text-gray-300 hover:text-white">Contact Us</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">News</a></li>
+</ul>
+</div>
+<!-- Services -->
+<div>
+<h3 class="text-xl font-bold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white">Web Development</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Digital Marketing</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Graphic Design</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Consulting Services</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Business Solutions</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h3 class="text-xl font-bold mb-4">Contact Us</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300 mr-3 mt-1">
+<i class="ri-map-pin-line"></i>
+</div>
+<span class="text-gray-300">123 Main Street, Colombo 03, Sri Lanka</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300 mr-3 mt-1">
+<i class="ri-phone-line"></i>
+</div>
+<span class="text-gray-300">+94 11 234 5678</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300 mr-3 mt-1">
+<i class="ri-mail-line"></i>
+</div>
+<span class="text-gray-300">info@example.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 All Rights Reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Use</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm">Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Card Detail Modal -->
+<div id="cardModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+<div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+<div class="p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 id="modalTitle" class="text-2xl font-bold text-gray-800"></h2>
+<button onclick="closeCardModal()" class="text-gray-500 hover:text-gray-700">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-close-line ri-lg"></i>
+</div>
+</button>
+</div>
+<div id="modalContent" class="space-y-6"></div>
+<div class="mt-8 flex justify-end">
+<button onclick="closeCardModal()" class="bg-gray-200 text-gray-800 px-6 py-2 !rounded-button font-medium hover:bg-gray-300 transition whitespace-nowrap">Close</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', () => {
+mobileMenu.classList.toggle('hidden');
+});
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+// Close mobile menu if open
+if (!mobileMenu.classList.contains('hidden')) {
+mobileMenu.classList.add('hidden');
+}
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80, // Offset for fixed header
+behavior: 'smooth'
+});
+}
+});
+});
+// Card Detail Modal Functions
+const cardModal = document.getElementById('cardModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalContent = document.getElementById('modalContent');
+function openCardDetails(cardType) {
+// Set modal title and content based on card type
+switch(cardType) {
+case 'home':
+modalTitle.textContent = 'Home Page';
+modalContent.innerHTML = `
+<div class="mb-6">
+<img src="https://public.readdy.ai/ai/img_res/0dd9dd190e10adc25f3de6a8fdf9292f.jpg" alt="Home Page Details" class="w-full h-auto rounded-lg mb-4">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Welcome to Our Website</h3>
+<p class="text-gray-600">Our homepage provides a comprehensive overview of our company, services, and latest news. It's designed to give visitors a clear understanding of what we offer and how we can help them.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-800 mb-2">Key Features</h4>
+<ul class="space-y-2 text-gray-600">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Interactive hero section</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Latest news and updates</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Featured services showcase</span>
+</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-800 mb-2">What You'll Find</h4>
+<ul class="space-y-2 text-gray-600">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-information-line"></i>
+</div>
+<span>Company overview and mission</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-information-line"></i>
+</div>
+<span>Testimonials from satisfied clients</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-information-line"></i>
+</div>
+<span>Quick access to all main sections</span>
+</li>
+</ul>
+</div>
+</div>
+`;
+break;
+case 'about':
+modalTitle.textContent = 'About Us';
+modalContent.innerHTML = `
+<div class="mb-6">
+<img src="https://public.readdy.ai/ai/img_res/393bac1cba2e23f2296471b471cb0209.jpg" alt="About Us Details" class="w-full h-auto rounded-lg mb-4">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Our Story</h3>
+<p class="text-gray-600">Founded in 2010, our company has grown from a small startup to a leading provider of business solutions. We're dedicated to delivering exceptional service and innovative solutions to our clients worldwide.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-800 mb-2">Our Mission</h4>
+<p class="text-gray-600">To empower businesses with innovative solutions that drive growth and success in an ever-changing digital landscape.</p>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-800 mb-2">Our Vision</h4>
+<p class="text-gray-600">To be the global leader in providing cutting-edge business solutions that transform how companies operate and succeed.</p>
+</div>
+</div>
+<div class="mt-6">
+<h4 class="font-bold text-gray-800 mb-2">Our Leadership Team</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+<div class="text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-2">
+<img src="https://public.readdy.ai/ai/img_res/03cd36414e936c80342fadc8923c894b.jpg" alt="CEO" class="w-full h-full object-cover">
+</div>
+<h5 class="font-medium text-gray-800">Michael Chen</h5>
+<p class="text-gray-600 text-sm">CEO & Founder</p>
+</div>
+<div class="text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-2">
+<img src="https://public.readdy.ai/ai/img_res/518be8e148b4e9b1d208b33c302560f3.jpg" alt="COO" class="w-full h-full object-cover">
+</div>
+<h5 class="font-medium text-gray-800">Sarah Johnson</h5>
+<p class="text-gray-600 text-sm">COO</p>
+</div>
+<div class="text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-2">
+<img src="https://public.readdy.ai/ai/img_res/f2ccdfe07fe7e20c856ff46123effb60.jpg" alt="CTO" class="w-full h-full object-cover">
+</div>
+<h5 class="font-medium text-gray-800">David Rodriguez</h5>
+<p class="text-gray-600 text-sm">CTO</p>
+</div>
+</div>
+</div>
+`;
+break;
+case 'services':
+modalTitle.textContent = 'Our Services';
+modalContent.innerHTML = `
+<div class="mb-6">
+<img src="https://public.readdy.ai/ai/img_res/042fbe4d3b9191eafc34682a25a9d20c.jpg" alt="Services Details" class="w-full h-auto rounded-lg mb-4">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Comprehensive Business Solutions</h3>
+<p class="text-gray-600">We offer a wide range of services designed to help your business grow and succeed in today's competitive market. Our team of experts is dedicated to delivering high-quality solutions tailored to your specific needs.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-3">
+<i class="ri-code-s-slash-line"></i>
+</div>
+<h4 class="font-bold text-gray-800 mb-2">Web Development</h4>
+<p class="text-gray-600">Custom website development, e-commerce solutions, and web application development using the latest technologies.</p>
+<ul class="mt-3 space-y-1 text-gray-600 text-sm">
+<li>• Responsive website design</li>
+<li>• E-commerce platforms</li>
+<li>• Custom web applications</li>
+<li>• Website maintenance</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-3">
+<i class="ri-line-chart-line"></i>
+</div>
+<h4 class="font-bold text-gray-800 mb-2">Digital Marketing</h4>
+<p class="text-gray-600">Comprehensive digital marketing strategies to increase your online presence and drive business growth.</p>
+<ul class="mt-3 space-y-1 text-gray-600 text-sm">
+<li>• Search engine optimization (SEO)</li>
+<li>• Social media marketing</li>
+<li>• Pay-per-click advertising</li>
+<li>• Email marketing campaigns</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-3">
+<i class="ri-palette-line"></i>
+</div>
+<h4 class="font-bold text-gray-800 mb-2">Graphic Design</h4>
+<p class="text-gray-600">Professional graphic design services to enhance your brand identity and visual communication.</p>
+<ul class="mt-3 space-y-1 text-gray-600 text-sm">
+<li>• Logo and brand identity design</li>
+<li>• Print and digital media design</li>
+<li>• Packaging design</li>
+<li>• Illustration and infographics</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-3">
+<i class="ri-customer-service-2-line"></i>
+</div>
+<h4 class="font-bold text-gray-800 mb-2">Consulting Services</h4>
+<p class="text-gray-600">Expert business consulting to help you optimize operations and achieve your business goals.</p>
+<ul class="mt-3 space-y-1 text-gray-600 text-sm">
+<li>• Business strategy development</li>
+<li>• Process optimization</li>
+<li>• Market research and analysis</li>
+<li>• Growth and expansion planning</li>
+</ul>
+</div>
+</div>
+`;
+break;
+case 'contact':
+modalTitle.textContent = 'Contact Us';
+modalContent.innerHTML = `
+<div class="mb-6">
+<img src="https://public.readdy.ai/ai/img_res/682fce77a7d6222baf2ac95296a12966.jpg" alt="Contact Us Details" class="w-full h-auto rounded-lg mb-4">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Get in Touch</h3>
+<p class="text-gray-600">We're here to answer any questions you may have about our services. Reach out to us and we'll respond as soon as we can.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<h4 class="font-bold text-gray-800 mb-4">Contact Information</h4>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3">
+<i class="ri-map-pin-line"></i>
+</div>
+<div>
+<h5 class="font-medium text-gray-800">Address</h5>
+<p class="text-gray-600">123 Main Street, Colombo 03, Sri Lanka</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3">
+<i class="ri-phone-line"></i>
+</div>
+<div>
+<h5 class="font-medium text-gray-800">Phone</h5>
+<p class="text-gray-600">+94 11 234 5678</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3">
+<i class="ri-mail-line"></i>
+</div>
+<div>
+<h5 class="font-medium text-gray-800">Email</h5>
+<p class="text-gray-600">info@example.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3">
+<i class="ri-time-line"></i>
+</div>
+<div>
+<h5 class="font-medium text-gray-800">Business Hours</h5>
+<p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
+<p class="text-gray-600">Saturday: 10:00 AM - 2:00 PM</p>
+<p class="text-gray-600">Sunday: Closed</p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-gray-800 mb-4">Send Us a Message</h4>
+<form class="space-y-4">
+<div>
+<label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+<input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+<input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+</div>
+<div>
+<label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+<input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+</div>
+<div>
+<label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+<textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary focus:border-primary outline-none"></textarea>
+</div>
+<button type="submit" class="bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-blue-700 transition whitespace-nowrap">Send Message</button>
+</form>
+</div>
+</div>
+`;
+break;
+default:
+modalTitle.textContent = 'Page Details';
+modalContent.innerHTML = '<p class="text-gray-600">No details available for this page.</p>';
+}
+// Show the modal
+cardModal.classList.remove('hidden');
+document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+}
+function closeCardModal() {
+cardModal.classList.add('hidden');
+document.body.style.overflow = ''; // Restore scrolling
+}
+// Close modal when clicking outside the content
+cardModal.addEventListener('click', function(e) {
+if (e.target === cardModal) {
+closeCardModal();
+}
+});
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && !cardModal.classList.contains('hidden')) {
+closeCardModal();
+}
+});
+</script>
+</body>
+</html>
